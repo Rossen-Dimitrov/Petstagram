@@ -14,6 +14,9 @@ class PhotoComment(models.Model):
         Photo, on_delete=models.CASCADE,
     )
 
+    class Meta:
+        ordering = ["-date_time_of_publication"]
+
 
 class PhotoLike(models.Model):
     to_photo = models.ForeignKey(

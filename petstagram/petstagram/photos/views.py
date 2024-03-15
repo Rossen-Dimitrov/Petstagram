@@ -9,8 +9,8 @@ def photo_add(request):
 
 def photo_details(request, pk):
     photo = Photo.objects.get(pk=pk)
-    likes = photo.photo_like_set.all()
-    comments = photo.photo_comment_set.all()
+    likes = photo.photolike_set.all()
+    comments = photo.photocomment_set.all()
     context = {
         'photo': photo,
         'comments': comments,

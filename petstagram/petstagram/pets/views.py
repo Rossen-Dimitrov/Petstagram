@@ -9,11 +9,11 @@ def pet_add(request):
 
 def pet_details(request, username, pet_slug):
     pet = Pet.objects.get(slug=pet_slug)
-    all_photos = pet.photos_set.all()
+    all_photos = pet.photo_set.all()
     context = {
         "pet": pet,
         "all_photos": all_photos,
-        "photos_count": pet.photos_set.count()
+        "photos_count": pet.photo_set.count()
     }
     return render(request, 'pets/pet-details-page.html', context=context)
 

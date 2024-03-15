@@ -15,7 +15,9 @@
 
             <!-- Start Pet Photos Post Section -->
             {% for photo in all_photos %}
-                {% include 'common/pets-post.html' %}
+                <div class="card">
+                    {% include 'common/pets-post.html' %}
+                </div>
             {% endfor %}
         </div>
     </div>
