@@ -11,7 +11,7 @@ class Photo(models.Model):
     MAX_LOCATION = 30
     MAX_PHOTO_SIZE = 5.0
     photo = models.ImageField(
-        upload_to='mediafiles/pet_photos',
+        upload_to='pet_photos/',
         validators=(MaxImageSizeValidator(MAX_PHOTO_SIZE),),
         null=False,
         blank=True
