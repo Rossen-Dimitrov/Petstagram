@@ -3,12 +3,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <!-- Link to Home Page -->
                 <a href="{% url 'home' %}">
-                    <img width="50px" src="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}" alt="img1">
+                    <img width="50px" src="{% static '/images/free-30-instagram-stories-icons23_122570.png' %}"
+                         alt="img1">
                 </a>
-
-                <!-- Link to Home Page -->
                 <a class="home" href="{% url 'home' %}">
                     <i>Petstagram</i>
                 </a>
@@ -16,41 +14,40 @@
 
             <div class="nav-links">
                 <ul class="nav-group">
-                    <li class="nav-item">
-
-                        <!-- Link to Add Pet Page -->
-                        <a href="{% url 'pet add' %}">
-                            <i>Add Pet</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-
-                        <!-- Link to Add Photo Page -->
-                        <a href="{% url 'photo add' %}">
-                            <i>Add Photo</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-
-                        <!-- Link to Login Page -->
-                        <a href="{% url 'user login' %}">
-                            <i>Login</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-
-                        <!-- Link to Register Page -->
-                        <a href="{% url 'user register' %}">
-                            <i>Register</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-
-                        <!-- Link to Profile Page -->
-                        <a href="{% url 'user profile details' pk=1 %}">
-                            <i>Profile</i>
-                        </a>
-                    </li>
+                    
+                        <li class="nav-item">
+                            <a href="{% url 'pet add' %}">
+                                <i>Add Pet</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'photo add' %}">
+                                <i>Add Photo</i>
+                            </a>
+                        </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="{% url 'user profile details' pk=1 %}">
+                                <i>Profile: {{ request.user.username }}</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'user logout' %}">
+                                <i>Logout</i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'user login' %}">
+                                <i>Login</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'user register' %}">
+                                <i>Register</i>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

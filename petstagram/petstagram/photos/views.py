@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from petstagram.photos.forms import PhotoEditForm, PhotoCreateForm, PhotoDeleteForm
 from petstagram.photos.models import Photo
 
 
+@login_required
 def photo_add(request):
     form = PhotoCreateForm()
     if request.method == 'POST':
@@ -19,6 +21,7 @@ def photo_add(request):
     return render(request, 'photos/photo-add-page.html', context=context)
 
 
+@login_required
 def photo_details(request, pk):
     photo = Photo.objects.filter(pk=pk).get()
     likes = photo.photolike_set.all()
@@ -31,6 +34,7 @@ def photo_details(request, pk):
     return render(request, 'photos/photo-details-page.html', context=context)
 
 
+@login_required
 def photo_edit(request, pk):
     photo = Photo.objects.filter(pk=pk).get()
     if request.method == 'GET':
@@ -49,6 +53,7 @@ def photo_edit(request, pk):
     return render(request, 'photos/photo-edit-page.html', context=context)
 
 
+@login_required
 def photo_delete(request, pk):
     photo = Photo.objects.filter(pk=pk).get()
 
