@@ -4,9 +4,9 @@
     <div class="container">
         <div class="col-9">
             <!-- IF the viewer is the creator of the photo -->
-            
-            <!-- Start Pet Photo Post Section -->
-            <div class="card">
+            {% if owner == request.user %}
+                <!-- Start Pet Photo Post Section -->
+                <div class="card">
                 <div class="edit-delete-btns">
 
                     <!-- Link to Edit Pet Photo Page -->
@@ -20,8 +20,9 @@
                         <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
                     </a>
                 </div>
-                <!-- End IF the viewer is the creator of the photo -->
-               {% include 'common/pets-post.html' %}
+            {% endif %}
+            <!-- End IF the viewer is the creator of the photo -->
+            {% include 'common/pets-post.html' %}
             </div>
         </div>
     </div>

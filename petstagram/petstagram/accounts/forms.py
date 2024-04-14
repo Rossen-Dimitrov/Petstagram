@@ -1,6 +1,8 @@
 from django import forms
 from petstagram.accounts.models import PetstagramUser
-from django.contrib.auth import forms as auth_forms
+from django.contrib.auth import forms as auth_forms, get_user_model
+
+UserModel = get_user_model()
 
 
 class PetstagramUserCreateForm(auth_forms.UserCreationForm):
@@ -31,5 +33,19 @@ class PetstagramUserLoginForm(auth_forms.AuthenticationForm):
 
 class PetstagramUserEditForm(forms.ModelForm):
     class Meta():
-        model = PetstagramUser
+        model = UserModel
         fields = ('username', 'email', 'first_name', 'last_name', 'profile_picture', 'gender')
+        exclude = ('password',)
+        labels = {
+            'username': 'Username',
+            'email': 'Email',
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
+            'profile_picture': 'Image',
+            'gender': 'Gender'
+        }
+
+
+class PetstagramChangeForm(auth_forms.UserChangeForm):
+    class Meta(auth_forms.UserChangeForm.Meta):
+        model = UserModel

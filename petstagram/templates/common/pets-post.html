@@ -3,7 +3,8 @@
 <div class="top">
     <div class="userDetails">
         <!-- Link to User Profile Page -->
-        <a href="#">
+        <a href="{% url 'user profile details' pk=photo.user.pk %}">
+            
             <div class="profilepic">
                 <div class="profile_img">
                     <div class="image">
@@ -14,9 +15,9 @@
         </a>
         <h3>
             <!-- Link to User Profile Page -->
-            <a href="#">
+            <a href="{% url 'user profile details' pk=photo.user.pk %}">
                 <!-- if user has first name and last name -->
-                Diyan Kalaydzhiev
+                {{ photo.user.full_name }}
                 <!-- else -->
                 <!-- show user username -->
             </a>
@@ -42,7 +43,7 @@
             <!-- Start Like Button -->
             <span class="heart">
                     <a href="{% url 'like' photo_id=photo.id %}">
-                        {% if photo.photolike_set.all %}
+                        {% if photo.liked_by_user %}
                             <svg style="color: red"
                                  xmlns="http://www.w3.org/2000/svg"
                                  width="24"
@@ -120,9 +121,20 @@
     <a href="{% url "photo details" pk=photo.pk %}">
         <h4 class="details">See details</h4>
     </a>
+    <!-- Photo description -->
+    <p class="pet-details">{{ photo.description }}</p>
 
     <!-- Date of Publication -->
     <h5 class="postTime">{{ photo.date_of_publication }}</h5>
+    {% for comment in photo.photocomment_set.all %}
+        <div class="message">
+            <b>{{ comment.user.full_name }} said:</b>
+            <p>{{ comment.text }}</p>
+        </div>
+
+    {% empty %}
+        <b>No Comments yet</b>
+    {% endfor %}
 
     <!-- Start Add Comments Section -->
     <div class="addComments">

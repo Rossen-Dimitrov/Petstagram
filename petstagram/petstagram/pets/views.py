@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from petstagram.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from petstagram.pets.models import Pet
 
-
+@login_required
 def pet_details(request, username, pet_slug):
     pet = Pet.objects.get(slug=pet_slug)
     all_photos = pet.photo_set.all()
@@ -19,11 +19,15 @@ def pet_details(request, username, pet_slug):
 @login_required
 def pet_add(request):
     form = PetCreateForm(request.GET)
+
     if request.method == 'POST':
         form = PetCreateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("user profile details", pk=1)
+            pet = form.save(commit=False)
+            pet.user = request.user
+            pet.save()
+            return redirect("user profile details", pk=request.user.pk)
+
     context = {
         'form': form
     }
